@@ -1,0 +1,28 @@
+---
+title: "Princípios de modelagem matemática aplicadas à Pedometria"
+author: "Alan R. Panosso"
+date: "19/11/2020"
+output: html_document
+---
+
+# Instalações de Pacotes
+
+# Conhecendo o R
+
+## Escalares
+
+## Operadores
+
+## Vetores
+
+## Matrizes
+
+## Frame de dados
+
+# Entrada da dados
+
+# Entrada de dados
+
+# Dados e transformações
+
+# Funções

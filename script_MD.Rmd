@@ -182,20 +182,20 @@ alunos
 ## 7.1. Lendo diretamente da Internet
 
 ```{r}
-dados_usina <- read.table("https://raw.githubusercontent.com/arpanosso/posADM/master/dados_usina.txt",
+dados <- read.table("https://raw.githubusercontent.com/arpanosso/pedometria/main/dados/geomorfologia.txt",
                           h=TRUE,
                           sep="\t")
 ```
 
 ## 7.2. Banco de dados em TXT
-Faça o dowload do banco de dados [dados_usina.txt](https://raw.githubusercontent.com/arpanosso/posADM/master/dados_usina.txt)
+Faça o dowload do banco de dados [geomorfologia.txt](https://raw.githubusercontent.com/arpanosso/pedometria/main/dados/geomorfologia.txt)
 
 ```{r}
-# dados_usina <- read.table("C:/Users/panosso/Desktop/dados_usina.txt",h=TRUE,sep="\t")
+dados <- read.table("C:/R/geomorfologia.txt",h=TRUE,sep="\t")
 ```
 ## 7.3. Banco de dados do Excel
 
-Faça o download do banco de dados [dados_usina.xlsx](https://github.com/arpanosso/posADM/raw/master/dados_usina.xlsx)
+Faça o download do banco de dados [geomorfologia.xlsx](https://github.com/arpanosso/posADM/raw/master/dados_usina.xlsx)
 
 ![](fig10.png)
 

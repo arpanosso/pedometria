@@ -5,24 +5,567 @@ date: "19/11/2020"
 output: html_document
 ---
 
-# Instalações de Pacotes
+# 1. O que é o R
 
-# Conhecendo o R
+![](R.png)    
 
-## Escalares
+  * O sistema R é um ambiente que incorpora uma implementação da linguagem de programação S, desenvolvida por John Chambers et al. na Lucent Technologies em 1960. 
+  
+  * 1988: S-Plus é implementado o Software proprietário de análise de dados que contém a linguagem S.
+  
+  * 1996: Linguagem orientada a objetos R  (Ross Ihaka e Robert Gentleman).
 
-## Operadores
+  * R é uma poderosa linguagem, flexível e possui excelentes facilidades gráficas.
 
-## Vetores
+  * R é um projeto **open-source** e está disponível na internet sobre a General Public License (www.gnu.org/copyleft/gpl.html e www.fsf.org).
 
-## Matrizes
 
-## Frame de dados
+# 2. Instalação do R (sistema base)
 
-# Entrada da dados
+Baixe o R do site oficial The R Project for Statistical Computing <https://www.r-project.org/>
 
-# Entrada de dados
+Acesso rápido: [Download](<https://cran-r.c3sl.ufpr.br/bin/windows/base/R-4.0.3-win.exe>)
 
-# Dados e transformações
 
-# Funções
+Salve o arquivo de instalação em um diretório de seu computador e em seguida execute-o. 
+
+O processo é simples e intuitivo.
+
+# 3. Instalando o RStudio
+
+É um ambiente de desenvolvimento integrado (IDE) para o R, disponível em <https://rstudio.com/products/rstudio/download/>
+
+Escolha a o instalador de acordo com o seu sistema operacional. **Windows** no nosso caso.
+
+Novamente, salve o arquivo de instalação em um diretório de seu computador e em seguida execute-o.
+
+Após a instalação procure o ícone do R criado pelo instalador e clique nele.
+
+# 4. Pacotes no R (instalação dos pacotes)
+
+Um pacote é uma coleção de funções, exemplos e documentação. A funcionalidade de um pacote é frequentemente focada em uma metodologia estatística especial" (**Everitt & Hothorn**).
+
+![](Fig08.png) 
+
+### Utilizando a opção `Install/Packages`
+
+Instale alguns pacotes:  
+ 
+ * `tidyverse`   
+ * `agricolae`  
+ * `lawstat`  
+ * `nortest`  
+ * `lattice`
+ * `readxl`
+ * `stringr`
+ * `lubridate`
+
+# 5. Operações Básicas
+### operação aritmética
+$$
+\begin{aligned}
+& a) 1+7 = 8\\
+& b)1 - 2 \times10 = 19\\
+& c) 2^{10} = 1024\\
+& d) \frac{10}{2} = 3.33333
+\end{aligned}
+$$
+
+```{r eval=FALSE}
+1 + 7 # cálculo da soma destes dois números
+1 - 2 * 10 # prioridade da multiplicação
+2 ** 10 # potências utilizando ** ou ^
+10/3 # divisão
+```
+
+### funções encontradas em calculadoras científicas
+$$
+\begin{aligned}
+& a)\;\sqrt{9} = 3\\
+& b)\;seno\;\pi = 0\\
+& c)\;4! = 24\\
+& d)\; e^5 = 148.4132
+\end{aligned}
+$$
+```{r eval=FALSE}
+sqrt(9) # raiz quadrada
+sin(pi) # seno de Pi radianos é zero
+factorial(4) #4!=4*3*2*1
+exp(5) #exponencial de 5, e^5
+```
+
+### operações relacionais
+
+$$
+\begin{aligned}
+& a)\;7 > 5 \text{ retorna 'true'}\\
+& b)\;8 \leq 4 \text{ retorna 'false'}\\
+& c)\;5 = \frac{25}{5} \text{ retorna 'true'}\\
+& d)\; 4\neq 8 \text{ retorna 'true'}
+\end{aligned}
+$$
+
+```{r eval=FALSE}
+7 > 5 # 7 é maior que 5 ?
+8 <= 4 # 8 é menor ou igual a 4?
+5 == 25/5 # igual a
+4 != 8 # Diferente de
+```
+
+**Exercício 1**. Resolva as seguintes expressões:
+$$
+\begin{aligned}
+& a)\; log\;3 \\
+& b)\; log_4\;3\\
+& c)\; ln\;10\\
+& d)\; e^2\\
+& e)\; \sqrt(225)\\
+& f)\; \frac{25+60\times8}{(14-5)^2}\\
+& g)\; 8!\\
+& h)\; seno\;30°\\
+& i)\; \frac{1}{\sqrt{2\pi}}\cdot e^{-\frac{1}{2}\times4^2}\\
+& j)\; \text{Gerar 3 números aleatórios}\\
+\end{aligned}
+$$
+
+# 6. Principais objetos no R
+
+## 6.1. Escalar
+É um objeto ao qual é atribuído um valor que pode ter qualquer um dos tipos, numérico, caractere, complexo ou lógico.
+
+```{r}
+x <- 10
+"Maria" -> nome
+res  <- (x==20)
+```
+
+      Quando uma estrutura de dados é composta de variáveis com o mesmo tipo primitivo, temos um conjunto  de dados homogêneo (vetores, fatores e matrizes). 
+
+## 6.2. Vetor
+
+É considerada a **forma mais simples de armazenamento de dados** em um objeto, são classificados como variáveis com **um ou mais valores do mesmo tipo**. Na verdade, um escalar para o R é definido como um vetor com um único elemento. 
+Essa estrutura de dados tem o 1 como índice inicial. E podem ser referenciados por **[k]** onde k é a posição do elemento no vetor.
+
+
+```{r eval=FALSE}
+z<-c(3,2,7,4,5)
+z[3] # o elemento na posição 3 de z é o inteiro 7.
+1:10
+seq(0,100,25)
+rep(1,10)
+rep(1:3,4)
+rep("testemunha",4)
+x<-1:100
+is.vector(x)
+is.vector(z)
+length(z)
+```
+
+    Um conjunto heterogêneo de dados é composto por elementos que não são do mesmo tipo primitivo, como exemplo, temos os data.frames e as listas (ou registros).
+
+## 6.3. Data Frames 
+Os data.frames são considerados a **melhor forma de armazenar dados**, pois cada linha corresponde a uma unidade (observação), indivíduo ou pessoa, e cada coluna representa uma medida realizada em cada unidade (característica ou variáveis).
+
+```{r eval=FALSE}
+alunos<-data.frame(
+  RA=c(1933456,1935432,1869524),
+  Nome=c("Maria Eduarda Ferreira","Paulo Antunes Arantes","Ricardo Luís Siqueira"),
+  Média=c(9.5,7.75,4.8),
+  Situação=c("Aprovado","Aprovado","Exame")
+)
+alunos
+```
+
+
+# 7. Entrada de dados
+
+## 7.1. Lendo diretamente da Internet
+
+```{r}
+dados_usina <- read.table("https://raw.githubusercontent.com/arpanosso/posADM/master/dados_usina.txt",
+                          h=TRUE,
+                          sep="\t")
+```
+
+## 7.2. Banco de dados em TXT
+Faça o dowload do banco de dados [dados_usina.txt](https://raw.githubusercontent.com/arpanosso/posADM/master/dados_usina.txt)
+
+```{r}
+# dados_usina <- read.table("C:/Users/panosso/Desktop/dados_usina.txt",h=TRUE,sep="\t")
+```
+## 7.3. Banco de dados do Excel
+
+Faça o download do banco de dados [dados_usina.xlsx](https://github.com/arpanosso/posADM/raw/master/dados_usina.xlsx)
+
+![](fig10.png)
+
+![](fig11.png)
+
+```{r}
+library(readxl)
+# dados_usina <- read_excel("C:/Users/panosso/Desktop/dados_usina.xlsx")
+```
+
+# 8. Manipulação dos dados
+
+Para a manipulação dos nossos dados, vamos utilizar o pacote `dplyr`, que é um pacote específico para a manipulação de dados, unido ao pacote `ggplot2` é um poderoso recurso para exploração, transformação e visualização de dados. Ambos os pacotes fazem parte o `tidyverse`, que é um pacote de pacotes.
+
+## 5 principais funções (verbos) do `dplyr`.  
+
+  * `filter()`: seleciona/filtra por linhas (observações) a base de dados  
+  * `arrange()`:  ordena a base de dados de acordo com alguma coluna (variável)  
+  * `select()`:  seleciona colunas (variáveis)  
+  * `mutate()`:  modifica/transforma/cria variáveis (colunas)  
+  * `summarise()`:  resume/agrega, variáveis (colunas) de uma base de dados  
+
+## Regras para manipulação:  
+   1- O primeiro argumento sempre será um `data.frame`.  
+   2- Demais argumentos, descrevem como deve ser a manipulação.  
+   3- A resposta semrpe será um `data.frame`.  
+   4- Manipulação é realizada com o operador "PIPE" (`%>%`) - `CTRL SHIFT + M`.  
+
+### Carregando os pacotes
+```{r}
+library(tidyverse)
+library(lubridate) # manipulação de datas
+```
+
+**Exercício 2**. Execute a função `glimpse` para uma visão rápida a respeito das variáveis do banco de dados.
+```{r echo=FALSE}
+library(dplyr)
+glimpse(dados_usina)
+```
+
+**Exercício 3**. Selecione as **linhas** com produção de cana por hectare (tch) maiores que 90$ t\;ha^{-1}$.
+```{r eval=FALSE}
+dados_usina %>% 
+  filter(tch> 90)
+```
+
+**Exercício 4**. Crie outro banco de dados `svin` para aqueles registros onde não houve a aplicação de vinhaça no ano de 2014.
+```{r}
+svin<-dados_usina %>% 
+  filter(vinhaca == 0,Ano == 2014) 
+```
+
+**Exercício 5**. De `svin` selecione todas as glebas que não pertencem à fazenda "SÃO BENTO".
+```{r eval=FALSE}
+svin %>% 
+  filter(fazenda != "SÃO BENTO")
+```
+
+
+**Exercício 6**. De `svin` selecione todas as glebas que pertencen às fazendas "APARECIDA" ou "CARABOLANTE" e faça uma contagem de quantas glebas existem em cada fazenda.
+```{r eval=FALSE}
+svin %>% 
+  filter(fazenda == "APARECIDA" | fazenda == "CARABOLANTE") %>% 
+  count(fazenda) 
+```
+
+**Exercício 7**. Selecione os registros cuja variedade é CTC?
+```{r eval=FALSE}
+library(stringr)
+dados_usina %>% 
+  filter(str_detect(variedade,"CTC"))
+levels(as.factor(dados_usina$variedade))
+```
+**Exercício 8**. Selecione os registros cuja variedade é SP?
+```{r eval=FALSE}
+dados_usina %>% 
+  filter(str_detect(variedade,"^SP")) 
+```
+
+**Exercício 9**. Selecione os registros cujo nome da variedade termina com o número "5"?
+```{r eval=FALSE}
+dados_usina %>% 
+  filter(str_detect(variedade,"5$"))
+```
+
+**Exercício 10**. Selecione os registros que apresentam data de plantio superior a 01/01/2013?
+```{r}
+library(lubridate)
+dados_usina %>% 
+  filter(data_plantio > ymd("2013-01-01"))
+```
+
+**Exercício 11**. Ordene os registro por ordem crescente de data da coleta
+```{r eval=FALSE}
+dados_usina %>% 
+  arrange(data_avaliacao)
+```
+
+**Exercício 12**. Ordene os registro por ordem crescente decrescente de intensidade de infestação da broca
+```{r eval=FALSE}
+dados_usina %>% 
+  arrange(desc(broca))
+```
+
+**Exercício 13**. Calcule a idade da cana no momento da avaliação, em dias.
+```{r eval=FALSE}
+dados_usina %>% 
+  mutate(
+    idade_dias = difftime(data_avaliacao,data_plantio,units = "days"),
+    idade_anos = idade_dias/365
+  )
+```
+
+**Exercício 14**. Classifique a produtividade da cana-de-açúcar em baixa (tch<=50), média (entre 50 e 90) e alta, (tch>90).
+```{r eval=FALSE}
+dados_usina %>% 
+  mutate(
+    prod = case_when(
+      tch < 50 ~ "Baixa",
+      tch <= 90 ~ "Media",
+      tch <= 500 ~ "Alta",
+      TRUE ~ "Sem classificação")
+  )
+```
+
+# 9. Estatística Básica
+**Exercício 15**. Calcule as estatísticas descrivas produção da cana-de-açúcar para o banco de dados. 
+
+```{r eval=FALSE}
+library(agricolae)
+dados_usina %>% 
+  group_by(fazenda) %>% 
+  summarise(N=length(tch),
+            media = mean(tch),
+            mediana =median(tch),
+            minimo=min(tch),
+            maximo=max(tch),
+            variancia = var(tch),
+            desv_pad = sd(tch),
+            epm= desv_pad/sqrt(N),
+            cv=round(100*sd(tch)/mean(tch),2),
+            assimetria = skewness(tch),
+            curtosi = kurtosis(tch)
+            )
+```
+
+## 9.1 Gráficos usando o ggplot
+
+**Exercício 16**. Construa um gráfico de dispersão entre a chuva e temperatura do ar.
+```{r}
+# chamar os dados
+# filtrar, agrupar, gerar estatísticas se necessário
+# adicionar as camadas gráficas
+
+# Gráfico de Dispersão
+dados_usina %>% 
+  ggplot(aes(x=chuva,y=tmed) ) + # dizer quem será o x e o y dentro de aes
+  geom_point()
+```
+
+**Exercício 17**. Construa um gráfico de dispersão entre a chuva e temperatura do ar, mapeie os anos por meio das cores no novo gráfico.
+```{r}
+# Gráfico de Dispersão
+dados_usina %>% 
+  ggplot(aes(x=chuva,y=tmed,color=Ano) ) + # dizer quem será o x e o y dentro de aes
+  geom_point()+
+  geom_smooth(aes(x=chuva,y=tmed))
+```
+
+**Exercício 18**. Construa um gráfico de dispersão entre a chuva e temperatura do ar, mapeie os anos por meio das formas no novo gráfico.
+```{r}
+dados_usina %>% 
+  ggplot(aes(x=chuva,y=tmed)) + 
+  geom_point(aes(shape=as.factor(Ano)),color="red")
+```
+
+
+**Exercício 18**. Adicione os títulos dos gráficos, eixos e legendas.
+```{r}
+dados_usina %>% 
+  ggplot(aes(x=chuva,y=tmed) ) + # dizer quem será o x e o y dentro de aes
+  geom_point(aes(shape=as.factor(Ano)),color="red")+
+  theme_minimal()+
+  labs(x="Precipitação (mm)",y="Temperatura média (°C)",shape="Ano") +
+  ggtitle("Gráfico de dispersão",subtitle = "Aula ADM")
+```
+
+**Exercício 19**. Criar um gráfico de barras, com as principais variedades plantadas no período para a fazenda MODELO.
+```{r}
+dados_usina %>% 
+  filter(fazenda=="MODELO") %>% 
+  group_by(variedade) %>% 
+  summarise(n=n()) %>% 
+  mutate(perc=n/sum(n)) %>% 
+  ggplot(aes(x=variedade, y=perc))+
+  geom_col()
+```
+
+**Exercício 20**. Altere os eixos as cores do gráfico anterior.
+
+```{r}
+# Gráfico de Barras
+# Variedaeres plantadas na fazenda modelo
+dados_usina %>% 
+  filter(fazenda=="MODELO") %>% 
+  group_by(variedade) %>% 
+  summarise(n=n()) %>% 
+  mutate(perc=n/sum(n)) %>% 
+  ggplot(aes(x=variedade, y=perc))+
+  geom_col(fill="aquamarine4") +
+  coord_flip()
+```
+
+
+**Exercício 21**. Ordene o banco de dados das variedades mais plantadas para as menos plantadas.
+```{r}
+# Gráfico de Barras
+# 20 Variedaeres plantadas na fazenda modelo
+dados_usina %>% 
+  filter(fazenda=="MODELO") %>% 
+  group_by(variedade) %>% 
+  summarise(n=n()) %>% 
+  mutate(perc=n/sum(n),
+         variedade = variedade %>% fct_lump(n=20,w=perc) %>% fct_reorder(perc)) %>% 
+  ggplot(aes(x=variedade, y=perc))+
+  geom_col(fill="aquamarine4") +
+  coord_flip()
+```
+
+**Exercício 22**. Mostre as 30 variedades mais plantas na usina como um todo.
+```{r}
+# Gráfico de Barras
+# 30 Variedaeres plantadas na usina
+dados_usina %>% 
+  group_by(variedade) %>% 
+  summarise(n=n()) %>% 
+  mutate(perc=n/sum(n),
+         variedade = variedade %>% fct_lump(n=30,w=perc) %>% fct_reorder(perc)) %>% 
+  ggplot(aes(x=variedade, y=perc))+
+  geom_col(fill="aquamarine4") +
+  coord_flip() +
+  scale_y_continuous(labels = scales::percent_format())
+```
+
+**Exercício 23**. Criar o gráfico de colunas par as médias de produção de cana por ano para cada fazenda pertencente à usina.
+```{r}
+# Gráfico das médias por ano em cada fazenda
+dados_usina %>% 
+  group_by(Ano,fazenda) %>% 
+  summarise(tch_m=mean(tch)) %>% 
+  ggplot(aes(x=Ano,y=tch_m,fill=as.factor(fazenda))) +
+#  geom_col(position = "stack") +
+  geom_col(position = "dodge")
+#  facet_wrap(~fazenda)
+```
+
+**Exercício 24**. Adicione a linha de tendência linear para cada fazenda.
+```{r}
+# Gráfico das médias por ano em cada fazenda
+dados_usina %>% 
+  group_by(Ano,fazenda) %>% 
+  summarise(tch_m=mean(tch)) %>% 
+  ggplot(aes(x=Ano,y=tch_m,color=as.factor(fazenda))) +
+  geom_line()+
+  geom_point()+
+  facet_wrap(~fazenda)+
+    geom_smooth(mapping = aes(x=Ano, y=tch_m), 
+              method="lm",
+              color="red",lwd=.6,lty=2, 
+              se=FALSE)
+```
+
+**Exercício 25**. Construa o gráfico de distribuição de frequência para as variáveis contínuas do banco de dados.
+```{r}
+# Hitograma das variáveis contínuas
+dados_usina %>% 
+  ggplot(aes(x=tch))+
+  geom_histogram(aes(y=..density..),color="black",fill="white",bins=30)+
+  geom_density(alpha=.2,fill="salmon")+
+  geom_vline(aes(xintercept=mean(tch)),color="blue",size=1.6,linetype="dashed")
+```
+**Exercício 26**. Construa o gráfico de distribuição de frequência para tch em cada fazenda, de maneira indepentende do ano
+
+```{r}
+dados_usina %>% 
+  group_by(fazenda) %>% 
+  ggplot(aes(x=tch))+
+  geom_histogram(aes(y=..density..),color="black",fill="white",bins=30)+
+  geom_density(alpha=.2,fill="salmon")+
+  geom_vline(aes(xintercept=mean(tch)),color="blue",size=1,linetype="dashed")+
+  facet_wrap(~fazenda)
+```
+
+
+## Exemplo de Violin plot  
+```{r}
+# Gráficos Violino
+dados_usina %>%
+  ggplot(aes(y=tch,x=as.factor(Ano),fill=as.factor(Ano))) +
+  geom_violin(trim = FALSE) +
+  stat_summary(fun.y = mean, geom = "point",shape=23,size=2,color="black",fill="gray")
+
+dados_usina %>%
+  ggplot(aes(y=tch,x=as.factor(fazenda),fill=as.factor(fazenda))) +
+  geom_violin(trim = FALSE) +
+  stat_summary(fun.y = mean, geom = "point",shape=23,size=2,color="black",fill="gray")
+  
+```
+
+# 10. Alguns testes inferenciais  
+## 10.1. Testes de comparação de médias  
+**Exercício 27**. Para o ano de 2015, verifique se as variâncias da produção de cana-de-açúcar são semelhantes para  glebas que recebram ou não vinhaça.
+```{r}
+da<-dados_usina %>%
+  filter(Ano==2015) %>% 
+  mutate(
+    vin = if_else(vinhaca==0,0,1)
+  )
+var.test(da$tch~da$vin)
+```
+
+
+**Exercício 28**. Para o ano de 2015, verifique se a produção de cana-de-açúcar foi maior nas glebas que recebram vinhaça.
+```{r}
+da<-dados_usina %>%
+  filter(Ano==2015) %>% 
+  mutate(
+    vin = if_else(vinhaca==0,0,1)
+  )
+t.test(da$tch~da$vin,var.equal=TRUE)
+```
+## 10.3. Normalidade  
+**Exercício 29**. Para os dados de precipitação (chuva) para a fazenda FORTALEZA, realize o teste de normalidade.
+```{r}
+# TCH e CHUVA
+library(nortest)
+da<-dados_usina %>% 
+  filter(fazenda=="FORTALEZA")
+da %>% 
+  ggplot(aes(x=chuva)) +
+  geom_histogram(aes(y=..density..),color="black",fill="white",bins=30)
+
+shapiro.test(da$tch)
+cvm.test(da$tch)
+lillie.test(da$tch)
+ad.test(da$tch)
+```
+
+## 10.4. Homocedasticidade e normalidade do erros na Análise de Variância
+
+**Exercício 30**. Realize a ANOVA (análise de variância) para verificar o efeito dos anos na produção da cana-de-açúcar nas fazendas FORTALEZA e CARABOLANTE.
+```{r}
+# FORTALEZA E CARABOLANTE
+da<-dados_usina %>% 
+  filter(fazenda=="CARABOLANTE")
+mod<-aov(tch~Ano,data=da)
+anova(mod)
+library(lawstat)
+levene.test(da$tch,da$Ano)
+plot(da$tch~as.factor(da$Ano))
+
+res<-rstudent(mod)
+hist(res)
+shapiro.test(res)
+ad.test(res)
+lillie.test(res)
+cvm.test(res)
+```
+# Referências
+
+CHANG, W. R Graphics Cookbook. USA: O’Reilly Media, Inc, 2013. 397 p.
+
+TEETOR, P. R Cookbook. USA: O’Reilly Media, Inc, https://rc2e.com/.

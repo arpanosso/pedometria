@@ -5,7 +5,7 @@ date: "19/11/2020"
 output: html_document
 ---
 
-# 1. O que é o R
+# O R
 
 ![](R.png)    
 
@@ -20,7 +20,7 @@ output: html_document
   * R é um projeto **open-source** e está disponível na internet sobre a General Public License (www.gnu.org/copyleft/gpl.html e www.fsf.org).
 
 
-# 2. Instalação do R (sistema base)
+# Instalação do R (sistema base)
 
 Baixe o R do site oficial The R Project for Statistical Computing <https://www.r-project.org/>
 
@@ -31,7 +31,7 @@ Salve o arquivo de instalação em um diretório de seu computador e em seguida 
 
 O processo é simples e intuitivo.
 
-# 3. Instalando o RStudio
+# Instalando o RStudio
 
 É um ambiente de desenvolvimento integrado (IDE) para o R, disponível em <https://rstudio.com/products/rstudio/download/>
 
@@ -41,7 +41,7 @@ Novamente, salve o arquivo de instalação em um diretório de seu computador e 
 
 Após a instalação procure o ícone do R criado pelo instalador e clique nele.
 
-# 4. Pacotes no R (instalação dos pacotes)
+# Pacotes no R (instalação dos pacotes)
 
 Um pacote é uma coleção de funções, exemplos e documentação. A funcionalidade de um pacote é frequentemente focada em uma metodologia estatística especial" (**Everitt & Hothorn**).
 
@@ -60,7 +60,7 @@ Instale alguns pacotes:
  * `stringr`
  * `lubridate`
 
-# 5. Operações Básicas
+# Operações Básicas
 ### operação aritmética
 $$
 \begin{aligned}
@@ -128,9 +128,9 @@ $$
 \end{aligned}
 $$
 
-# 6. Principais objetos no R
+# Principais objetos no R
 
-## 6.1. Escalar
+## Escalar
 É um objeto ao qual é atribuído um valor que pode ter qualquer um dos tipos, numérico, caractere, complexo ou lógico.
 
 ```{r}
@@ -141,7 +141,7 @@ res  <- (x==20)
 
       Quando uma estrutura de dados é composta de variáveis com o mesmo tipo primitivo, temos um conjunto  de dados homogêneo (vetores, fatores e matrizes). 
 
-## 6.2. Vetor
+## Vetor
 
 É considerada a **forma mais simples de armazenamento de dados** em um objeto, são classificados como variáveis com **um ou mais valores do mesmo tipo**. Na verdade, um escalar para o R é definido como um vetor com um único elemento. 
 Essa estrutura de dados tem o 1 como índice inicial. E podem ser referenciados por **[k]** onde k é a posição do elemento no vetor.
@@ -163,7 +163,7 @@ length(z)
 
     Um conjunto heterogêneo de dados é composto por elementos que não são do mesmo tipo primitivo, como exemplo, temos os data.frames e as listas (ou registros).
 
-## 6.3. Data Frames 
+## Data Frames 
 Os data.frames são considerados a **melhor forma de armazenar dados**, pois cada linha corresponde a uma unidade (observação), indivíduo ou pessoa, e cada coluna representa uma medida realizada em cada unidade (característica ou variáveis).
 
 ```{r eval=FALSE}
@@ -177,9 +177,9 @@ alunos
 ```
 
 
-# 7. Entrada de dados
+# Entrada de dados
 
-## 7.1. Lendo diretamente da Internet
+## Lendo diretamente da Internet
 
 ```{r}
 dados <- read.table("https://raw.githubusercontent.com/arpanosso/pedometria/main/dados/geomorfologia.txt",
@@ -187,15 +187,15 @@ dados <- read.table("https://raw.githubusercontent.com/arpanosso/pedometria/main
                           sep="\t")
 ```
 
-## 7.2. Banco de dados em TXT
+## Banco de dados em TXT
 Faça o dowload do banco de dados [geomorfologia.txt](https://raw.githubusercontent.com/arpanosso/pedometria/main/dados/geomorfologia.txt)
 
 ```{r}
 dados <- read.table("C:/R/geomorfologia.txt",h=TRUE,sep="\t")
 ```
-## 7.3. Banco de dados do Excel
+## Banco de dados do Excel
 
-Faça o download do banco de dados [geomorfologia.xlsx](https://github.com/arpanosso/posADM/raw/master/dados_usina.xlsx)
+Faça o download do banco de dados [geomorfologia.xlsx](https://github.com/arpanosso/pedometria/raw/main/dados/geomorfologia.xlsx)
 
 ![](fig10.png)
 
@@ -203,14 +203,15 @@ Faça o download do banco de dados [geomorfologia.xlsx](https://github.com/arpan
 
 ```{r}
 library(readxl)
-# dados_usina <- read_excel("C:/Users/panosso/Desktop/dados_usina.xlsx")
+geomorfologia <- read_excel("dados/geomorfologia.xlsx")
+View(geomorfologia)
 ```
 
-# 8. Manipulação dos dados
+# Manipulação dos dados
 
 Para a manipulação dos nossos dados, vamos utilizar o pacote `dplyr`, que é um pacote específico para a manipulação de dados, unido ao pacote `ggplot2` é um poderoso recurso para exploração, transformação e visualização de dados. Ambos os pacotes fazem parte o `tidyverse`, que é um pacote de pacotes.
 
-## 5 principais funções (verbos) do `dplyr`.  
+## Principais funções (verbos) do `dplyr`.  
 
   * `filter()`: seleciona/filtra por linhas (observações) a base de dados  
   * `arrange()`:  ordena a base de dados de acordo com alguma coluna (variável)  
@@ -221,176 +222,164 @@ Para a manipulação dos nossos dados, vamos utilizar o pacote `dplyr`, que é u
 ## Regras para manipulação:  
    1- O primeiro argumento sempre será um `data.frame`.  
    2- Demais argumentos, descrevem como deve ser a manipulação.  
-   3- A resposta semrpe será um `data.frame`.  
+   3- A resposta sempre será um `data.frame`.  
    4- Manipulação é realizada com o operador "PIPE" (`%>%`) - `CTRL SHIFT + M`.  
 
 ### Carregando os pacotes
 ```{r}
-library(tidyverse)
-library(lubridate) # manipulação de datas
+library(tidyverse) # um pacote de pacotes...
 ```
 
 **Exercício 2**. Execute a função `glimpse` para uma visão rápida a respeito das variáveis do banco de dados.
 ```{r echo=FALSE}
-library(dplyr)
-glimpse(dados_usina)
+glimpse(dados)
 ```
 
-**Exercício 3**. Selecione as **linhas** com produção de cana por hectare (tch) maiores que 90$ t\;ha^{-1}$.
+**Exercício 3**. Selecione as **linhas** para superfície igual a "II".
 ```{r eval=FALSE}
-dados_usina %>% 
-  filter(tch> 90)
+dados %>% 
+  filter(SUP == "II")
 ```
 
-**Exercício 4**. Crie outro banco de dados `svin` para aqueles registros onde não houve a aplicação de vinhaça no ano de 2014.
+**Exercício 4**. Crie outro banco de dados para aqueles registros com ARGILA maior que 10, provenientes da superfície "I".
 ```{r}
-svin<-dados_usina %>% 
-  filter(vinhaca == 0,Ano == 2014) 
+df<-dados %>% 
+  filter(ARGILA > 10, SUP == "III") 
 ```
 
-**Exercício 5**. De `svin` selecione todas as glebas que não pertencem à fazenda "SÃO BENTO".
+**Exercício 5**. Desse novo objeto, selecione todas as observações que não pertençam ao solo "R".
 ```{r eval=FALSE}
-svin %>% 
-  filter(fazenda != "SÃO BENTO")
+df %>% 
+  filter(Solo != "R")
 ```
 
 
-**Exercício 6**. De `svin` selecione todas as glebas que pertencen às fazendas "APARECIDA" ou "CARABOLANTE" e faça uma contagem de quantas glebas existem em cada fazenda.
+**Exercício 6**. Dos dados originais faça uma contagem de quantos pontos existem em cada uma dessas superfícies.
 ```{r eval=FALSE}
-svin %>% 
-  filter(fazenda == "APARECIDA" | fazenda == "CARABOLANTE") %>% 
-  count(fazenda) 
+dados %>% 
+  group_by(SUP) %>% 
+  count(SUP) 
 ```
 
-**Exercício 7**. Selecione os registros cuja variedade é CTC?
+**Exercício 7**. Selecione todos os Latossolos?
 ```{r eval=FALSE}
 library(stringr)
-dados_usina %>% 
-  filter(str_detect(variedade,"CTC"))
-levels(as.factor(dados_usina$variedade))
-```
-**Exercício 8**. Selecione os registros cuja variedade é SP?
-```{r eval=FALSE}
-dados_usina %>% 
-  filter(str_detect(variedade,"^SP")) 
+dados %>% 
+  filter(str_detect(Solo,"^L"))
+levels(as.factor(dados$Solo))
 ```
 
-**Exercício 9**. Selecione os registros cujo nome da variedade termina com o número "5"?
+
+**Exercício 8**. Selecione os registros cujo solo é "PV4"?
 ```{r eval=FALSE}
-dados_usina %>% 
-  filter(str_detect(variedade,"5$"))
+dados %>% 
+  filter(str_detect(Solo,"PV4")) 
 ```
 
-**Exercício 10**. Selecione os registros que apresentam data de plantio superior a 01/01/2013?
-```{r}
-library(lubridate)
-dados_usina %>% 
-  filter(data_plantio > ymd("2013-01-01"))
+**Exercício 9**. Selecione os registros cujo nome do solo termina com o "p"?
+```{r eval=FALSE}
+dados %>% 
+  filter(str_detect(Solo,"p$"))
 ```
 
-**Exercício 11**. Ordene os registro por ordem crescente de data da coleta
+**Exercício 10**. Ordene os registro por ordem crescente de teor de ARGILA
 ```{r eval=FALSE}
-dados_usina %>% 
-  arrange(data_avaliacao)
+dados %>% 
+  arrange(ARGILA)
 ```
 
-**Exercício 12**. Ordene os registro por ordem crescente decrescente de intensidade de infestação da broca
+**Exercício 11**. Ordene os registro por ordem decrescente de "H_Al".
 ```{r eval=FALSE}
-dados_usina %>% 
-  arrange(desc(broca))
+dados %>% 
+  arrange(desc(H_Al))
 ```
 
-**Exercício 13**. Calcule a idade da cana no momento da avaliação, em dias.
+**Exercício 12**. Calcule a soma dos teores de ARGILA + SILTE, em seguida transforme o teor de fósforo para a escala logarítmica.
 ```{r eval=FALSE}
-dados_usina %>% 
+dados %>% 
   mutate(
-    idade_dias = difftime(data_avaliacao,data_plantio,units = "days"),
-    idade_anos = idade_dias/365
+    ARG_SILT = ARGILA + SILTE,
+    log_P = log10(P)
   )
 ```
 
-**Exercício 14**. Classifique a produtividade da cana-de-açúcar em baixa (tch<=50), média (entre 50 e 90) e alta, (tch>90).
+**Exercício 13**. Classifique a Textura do solo.
+![](textura.gif)
+
 ```{r eval=FALSE}
-dados_usina %>% 
+range(dados$ARGILA)
+dados %>% 
   mutate(
-    prod = case_when(
-      tch < 50 ~ "Baixa",
-      tch <= 90 ~ "Media",
-      tch <= 500 ~ "Alta",
+    TEXTURA = case_when(
+      ARGILA < 15 ~ "Arenosa",
+      ARGILA <= 35 ~ "Media",
+      ARGILA <= 60 ~ "Argilosa",
+      ARGILA > 60 ~ "Muito argilosa",
       TRUE ~ "Sem classificação")
   )
 ```
 
-# 9. Estatística Básica
-**Exercício 15**. Calcule as estatísticas descrivas produção da cana-de-açúcar para o banco de dados. 
+**Exercício 14**. Calcule as estatísticas descrivas para alguns atributos do solo de sua preferência. 
 
 ```{r eval=FALSE}
 library(agricolae)
-dados_usina %>% 
-  group_by(fazenda) %>% 
-  summarise(N=length(tch),
-            media = mean(tch),
-            mediana =median(tch),
-            minimo=min(tch),
-            maximo=max(tch),
-            variancia = var(tch),
-            desv_pad = sd(tch),
-            epm= desv_pad/sqrt(N),
-            cv=round(100*sd(tch)/mean(tch),2),
-            assimetria = skewness(tch),
-            curtosi = kurtosis(tch)
-            )
+dados %>% 
+  group_by(SUP) %>% 
+  summarise(N=length(Ca),
+            media = mean(Ca),
+            mediana =median(Ca)
+  )
 ```
 
-## 9.1 Gráficos usando o ggplot
+## Gráficos usando o ggplot
 
-**Exercício 16**. Construa um gráfico de dispersão entre a chuva e temperatura do ar.
+**Exercício 15**. Construa um gráfico de dispersão entre P e Ca.
 ```{r}
 # chamar os dados
 # filtrar, agrupar, gerar estatísticas se necessário
 # adicionar as camadas gráficas
 
 # Gráfico de Dispersão
-dados_usina %>% 
-  ggplot(aes(x=chuva,y=tmed) ) + # dizer quem será o x e o y dentro de aes
+dados %>% 
+  ggplot(aes(x=P,y=Ca) ) + # dizer quem será o x e o y dentro de aes
   geom_point()
 ```
 
-**Exercício 17**. Construa um gráfico de dispersão entre a chuva e temperatura do ar, mapeie os anos por meio das cores no novo gráfico.
+**Exercício 16**. Construa um gráfico de dispersão entre a ARGILA e SILTE do ar, mapeie as Superfícies por meio das cores no novo gráfico.
 ```{r}
 # Gráfico de Dispersão
-dados_usina %>% 
-  ggplot(aes(x=chuva,y=tmed,color=Ano) ) + # dizer quem será o x e o y dentro de aes
+dados %>% 
+  ggplot(aes(x=ARGILA,y=SILTE,color=SUP) ) + # dizer quem será o x e o y dentro de aes
   geom_point()+
-  geom_smooth(aes(x=chuva,y=tmed))
+  geom_smooth(aes(x=ARGILA,y=SILTE))
 ```
 
-**Exercício 18**. Construa um gráfico de dispersão entre a chuva e temperatura do ar, mapeie os anos por meio das formas no novo gráfico.
+**Exercício 17**. Construa um gráfico de dispersão entre a ARGILA e SILTE, mapeie as Superfícies por meio das formas dos marcadores no novo gráfico.
 ```{r}
-dados_usina %>% 
-  ggplot(aes(x=chuva,y=tmed)) + 
-  geom_point(aes(shape=as.factor(Ano)),color="red")
+dados %>% 
+  ggplot(aes(x=ARGILA,y=SILTE)) + 
+  geom_point(aes(shape=as.factor(SUP)),color="red")
 ```
 
 
 **Exercício 18**. Adicione os títulos dos gráficos, eixos e legendas.
 ```{r}
-dados_usina %>% 
-  ggplot(aes(x=chuva,y=tmed) ) + # dizer quem será o x e o y dentro de aes
-  geom_point(aes(shape=as.factor(Ano)),color="red")+
+dados %>% 
+  ggplot(aes(x=ARGILA,y=SILTE) ) + # dizer quem será o x e o y dentro de aes
+  geom_point(aes(shape=as.factor(SUP)),color="red")+
   theme_minimal()+
-  labs(x="Precipitação (mm)",y="Temperatura média (°C)",shape="Ano") +
-  ggtitle("Gráfico de dispersão",subtitle = "Aula ADM")
+  labs(x="Teor de Argila (%)",y="Teor de Silte (%)",shape="Superfície") +
+  ggtitle("Gráfico de dispersão",subtitle = "Pedometria")
 ```
 
-**Exercício 19**. Criar um gráfico de barras, com as principais variedades plantadas no período para a fazenda MODELO.
+**Exercício 19**. Criar um gráfico de barras, com os solos presentes na superfície "III".
 ```{r}
-dados_usina %>% 
-  filter(fazenda=="MODELO") %>% 
-  group_by(variedade) %>% 
+dados %>% 
+  filter(SUP=="III") %>% 
+  group_by(Solo) %>% 
   summarise(n=n()) %>% 
   mutate(perc=n/sum(n)) %>% 
-  ggplot(aes(x=variedade, y=perc))+
+  ggplot(aes(x=Solo, y=perc))+
   geom_col()
 ```
 
@@ -398,165 +387,131 @@ dados_usina %>%
 
 ```{r}
 # Gráfico de Barras
-# Variedaeres plantadas na fazenda modelo
-dados_usina %>% 
-  filter(fazenda=="MODELO") %>% 
-  group_by(variedade) %>% 
+dados %>% 
+  filter(SUP=="III") %>% 
+  group_by(Solo) %>% 
   summarise(n=n()) %>% 
   mutate(perc=n/sum(n)) %>% 
-  ggplot(aes(x=variedade, y=perc))+
+  ggplot(aes(x=Solo, y=perc))+
   geom_col(fill="aquamarine4") +
   coord_flip()
 ```
 
 
-**Exercício 21**. Ordene o banco de dados das variedades mais plantadas para as menos plantadas.
+**Exercício 21**. Ordene o banco de dados dos Solos mais observados para os menos observados.
 ```{r}
 # Gráfico de Barras
-# 20 Variedaeres plantadas na fazenda modelo
-dados_usina %>% 
-  filter(fazenda=="MODELO") %>% 
-  group_by(variedade) %>% 
+dados %>% 
+  group_by(Solo) %>% 
   summarise(n=n()) %>% 
   mutate(perc=n/sum(n),
-         variedade = variedade %>% fct_lump(n=20,w=perc) %>% fct_reorder(perc)) %>% 
-  ggplot(aes(x=variedade, y=perc))+
-  geom_col(fill="aquamarine4") +
+         Solo = Solo %>% fct_lump(n=10,w=perc) %>% fct_reorder(perc)) %>% 
+  ggplot(aes(x=Solo, y=perc))+
+  geom_col(fill="salmon") +
   coord_flip()
 ```
 
-**Exercício 22**. Mostre as 30 variedades mais plantas na usina como um todo.
-```{r}
-# Gráfico de Barras
-# 30 Variedaeres plantadas na usina
-dados_usina %>% 
-  group_by(variedade) %>% 
-  summarise(n=n()) %>% 
-  mutate(perc=n/sum(n),
-         variedade = variedade %>% fct_lump(n=30,w=perc) %>% fct_reorder(perc)) %>% 
-  ggplot(aes(x=variedade, y=perc))+
-  geom_col(fill="aquamarine4") +
-  coord_flip() +
-  scale_y_continuous(labels = scales::percent_format())
-```
 
-**Exercício 23**. Criar o gráfico de colunas par as médias de produção de cana por ano para cada fazenda pertencente à usina.
+**Exercício 22**. Criar o gráfico de colunas para as médias de Teor de ARGILA para cada Solo.
 ```{r}
-# Gráfico das médias por ano em cada fazenda
-dados_usina %>% 
-  group_by(Ano,fazenda) %>% 
-  summarise(tch_m=mean(tch)) %>% 
-  ggplot(aes(x=Ano,y=tch_m,fill=as.factor(fazenda))) +
+dados %>% 
+  group_by( Solo) %>% 
+  summarise(argila=mean(ARGILA)) %>% 
+  ggplot(aes(x=Solo,y=argila,fill=as.factor(Solo))) +
 #  geom_col(position = "stack") +
   geom_col(position = "dodge")
-#  facet_wrap(~fazenda)
 ```
 
-**Exercício 24**. Adicione a linha de tendência linear para cada fazenda.
+**Exercício 23**. Adicione a linha de tendência linear entre ARGILA e SILTE para cada SUP.
 ```{r}
 # Gráfico das médias por ano em cada fazenda
-dados_usina %>% 
-  group_by(Ano,fazenda) %>% 
-  summarise(tch_m=mean(tch)) %>% 
-  ggplot(aes(x=Ano,y=tch_m,color=as.factor(fazenda))) +
-  geom_line()+
+dados %>% 
+  group_by(SUP) %>% 
+  ggplot(aes(x=ARGILA,y=SILTE,color=as.factor(SUP))) +
   geom_point()+
-  facet_wrap(~fazenda)+
-    geom_smooth(mapping = aes(x=Ano, y=tch_m), 
+  facet_wrap(~SUP)+  # scales = "free", se necessário
+    geom_smooth(mapping = aes(x=ARGILA, y=SILTE), 
               method="lm",
               color="red",lwd=.6,lty=2, 
               se=FALSE)
 ```
 
-**Exercício 25**. Construa o gráfico de distribuição de frequência para as variáveis contínuas do banco de dados.
+**Exercício 24**. Construa o gráfico de distribuição de frequência para as variáveis contínuas do banco de dados.
 ```{r}
 # Hitograma das variáveis contínuas
-dados_usina %>% 
-  ggplot(aes(x=tch))+
+dados %>% 
+  group_by(SUP) %>% 
+  ggplot(aes(x=ARGILA))+
   geom_histogram(aes(y=..density..),color="black",fill="white",bins=30)+
   geom_density(alpha=.2,fill="salmon")+
-  geom_vline(aes(xintercept=mean(tch)),color="blue",size=1.6,linetype="dashed")
+  geom_vline(aes(xintercept=mean(ARGILA)),color="blue",size=1.6,linetype="dashed")
 ```
-**Exercício 26**. Construa o gráfico de distribuição de frequência para tch em cada fazenda, de maneira indepentende do ano
+**Exercício 25**. Construa o gráfico de distribuição de frequência para uma variável específica em cada superfície.
 
 ```{r}
-dados_usina %>% 
-  group_by(fazenda) %>% 
-  ggplot(aes(x=tch))+
+dados %>% 
+  group_by(SUP) %>% 
+  ggplot(aes(x=Ca))+
   geom_histogram(aes(y=..density..),color="black",fill="white",bins=30)+
   geom_density(alpha=.2,fill="salmon")+
-  geom_vline(aes(xintercept=mean(tch)),color="blue",size=1,linetype="dashed")+
-  facet_wrap(~fazenda)
+  facet_wrap(~SUP,scales = "free")
 ```
 
 
 ## Exemplo de Violin plot  
 ```{r}
-# Gráficos Violino
-dados_usina %>%
-  ggplot(aes(y=tch,x=as.factor(Ano),fill=as.factor(Ano))) +
+dados %>%
+  ggplot(aes(y=ARGILA,x=as.factor(SUP),fill=as.factor(SUP))) +
   geom_violin(trim = FALSE) +
-  stat_summary(fun.y = mean, geom = "point",shape=23,size=2,color="black",fill="gray")
+  stat_summary(fun = mean, geom = "point",shape=23,size=2,color="black",fill="gray")
 
-dados_usina %>%
-  ggplot(aes(y=tch,x=as.factor(fazenda),fill=as.factor(fazenda))) +
+dados %>%
+  ggplot(aes(y=Ca,x=as.factor(SUP),fill=as.factor(SUP))) +
   geom_violin(trim = FALSE) +
-  stat_summary(fun.y = mean, geom = "point",shape=23,size=2,color="black",fill="gray")
-  
+  stat_summary(fun = mean, geom = "point",shape=23,size=2,color="black",fill="gray")
 ```
 
-# 10. Alguns testes inferenciais  
-## 10.1. Testes de comparação de médias  
-**Exercício 27**. Para o ano de 2015, verifique se as variâncias da produção de cana-de-açúcar são semelhantes para  glebas que recebram ou não vinhaça.
+# Alguns testes inferenciais 
+
+## Testes de comparação de médias  
+**Exercício 26**. Verifique se as variâncias do teor de Ca são semelhantes para  as superfícies "I" e "II".
 ```{r}
-da<-dados_usina %>%
-  filter(Ano==2015) %>% 
-  mutate(
-    vin = if_else(vinhaca==0,0,1)
-  )
-var.test(da$tch~da$vin)
+da<-dados %>%
+  filter(SUP!="III") 
+var.test(da$Ca~da$SUP)
 ```
 
 
-**Exercício 28**. Para o ano de 2015, verifique se a produção de cana-de-açúcar foi maior nas glebas que recebram vinhaça.
+**Exercício 27**. Verifique se as médias do teor de Ca são semelhantes para as superfícies "I" e "II".
 ```{r}
-da<-dados_usina %>%
-  filter(Ano==2015) %>% 
-  mutate(
-    vin = if_else(vinhaca==0,0,1)
-  )
-t.test(da$tch~da$vin,var.equal=TRUE)
+t.test(da$Ca~da$SUP,var.equal=TRUE)
 ```
-## 10.3. Normalidade  
-**Exercício 29**. Para os dados de precipitação (chuva) para a fazenda FORTALEZA, realize o teste de normalidade.
+## Normalidade  
+**Exercício 28**. Para os dados de Ca para a Superfície "I", realize o teste de normalidade.
+
 ```{r}
-# TCH e CHUVA
 library(nortest)
-da<-dados_usina %>% 
-  filter(fazenda=="FORTALEZA")
+da<-dados %>% 
+  filter(SUP=="I")
+
 da %>% 
-  ggplot(aes(x=chuva)) +
+  ggplot(aes(x=Ca)) +
   geom_histogram(aes(y=..density..),color="black",fill="white",bins=30)
 
-shapiro.test(da$tch)
-cvm.test(da$tch)
-lillie.test(da$tch)
-ad.test(da$tch)
+shapiro.test(da$Ca)
+cvm.test(da$Ca)
+lillie.test(da$Ca)
+ad.test(da$Ca)
 ```
 
-## 10.4. Homocedasticidade e normalidade do erros na Análise de Variância
+## Homocedasticidade e normalidade do erros na Análise de Variância
 
-**Exercício 30**. Realize a ANOVA (análise de variância) para verificar o efeito dos anos na produção da cana-de-açúcar nas fazendas FORTALEZA e CARABOLANTE.
+**Exercício 29**. Realize a ANOVA (análise de variância) para verificar o efeito das superfícies nos teores de ARGILA.
 ```{r}
-# FORTALEZA E CARABOLANTE
-da<-dados_usina %>% 
-  filter(fazenda=="CARABOLANTE")
-mod<-aov(tch~Ano,data=da)
-anova(mod)
 library(lawstat)
-levene.test(da$tch,da$Ano)
-plot(da$tch~as.factor(da$Ano))
-
+mod<-aov(ARGILA~as.factor(SUP),data=dados)
+anova(mod)
+levene.test(dados$ARGILA,dados$SUP)
 res<-rstudent(mod)
 hist(res)
 shapiro.test(res)

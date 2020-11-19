@@ -435,7 +435,7 @@ summary {
 &amp; a) 1+7 = 8\\
 &amp; b)1 - 2 \times10 = 19\\
 &amp; c) 2^{10} = 1024\\
-&amp; d) \frac{10}{2} = 3.33333
+&amp; d) \frac{10}{3} = 3.33333
 \end{aligned}
 \]</span></p>
 <pre class="r"><code>1 + 7 # cálculo da soma destes dois números
@@ -536,7 +536,7 @@ alunos</code></pre>
 </div>
 <div id="banco-de-dados-em-txt" class="section level2">
 <h2>Banco de dados em TXT</h2>
-<p>Faça o dowload do banco de dados <a href="https://raw.githubusercontent.com/arpanosso/pedometria/main/dados/geomorfologia.txt">geomorfologia.txt</a></p>
+<p>Faça o download do banco de dados <a href="https://raw.githubusercontent.com/arpanosso/pedometria/main/dados/geomorfologia.txt">geomorfologia.txt</a></p>
 <pre class="r"><code>dados &lt;- read.table(&quot;C:/R/geomorfologia.txt&quot;,h=TRUE,sep=&quot;\t&quot;)</code></pre>
 </div>
 <div id="banco-de-dados-do-excel" class="section level2">
@@ -599,7 +599,7 @@ View(geomorfologia)</code></pre>
 ## $ ARGILA  &lt;dbl&gt; 21.5, 20.4, 21.4, 20.5, 20.7, 23.5, 23.1, 22.7, 22.0, 18.5,...
 ## $ S_A     &lt;dbl&gt; 0.05, 0.05, 0.05, 0.02, 0.10, 0.09, 0.03, 0.01, 0.11, 0.01,...
 ## $ AF_AG   &lt;dbl&gt; 6.16, 5.53, 4.44, 6.42, 7.94, 5.03, 6.03, 4.49, 4.20, 3.36,...
-## $ P       &lt;dbl&gt; 42, 22, 41, 27, 11, 12, 11, 16, 38, 25, 25, 6, 6, 7, 5, 4, ...
+## $ P       &lt;int&gt; 42, 22, 41, 27, 11, 12, 11, 16, 38, 25, 25, 6, 6, 7, 5, 4, ...
 ## $ pH      &lt;dbl&gt; 4.2, 3.8, 4.8, 4.0, 4.4, 4.0, 4.8, 5.4, 4.4, 5.2, 4.5, 5.1,...
 ## $ K       &lt;dbl&gt; 0.27, 0.11, 0.34, 0.13, 0.11, 0.14, 0.23, 0.28, 0.19, 0.14,...
 ## $ Ca      &lt;dbl&gt; 1.4, 0.4, 2.4, 0.7, 1.4, 0.6, 1.6, 3.3, 1.6, 2.9, 1.3, 1.6,...
@@ -607,7 +607,7 @@ View(geomorfologia)</code></pre>
 ## $ H_Al    &lt;dbl&gt; 5.2, 5.8, 4.2, 5.2, 4.2, 5.2, 3.4, 2.5, 5.2, 3.1, 4.2, 2.5,...
 ## $ SB      &lt;dbl&gt; 1.97, 0.61, 3.14, 0.93, 1.81, 0.84, 2.53, 4.88, 2.29, 4.74,...
 ## $ T       &lt;dbl&gt; 7.17, 6.41, 7.34, 6.13, 6.01, 6.04, 5.93, 7.38, 7.49, 7.84,...
-## $ V       &lt;dbl&gt; 27, 10, 43, 15, 30, 14, 43, 66, 31, 60, 32, 50, 22, 35, 36,...</code></pre>
+## $ V       &lt;int&gt; 27, 10, 43, 15, 30, 14, 43, 66, 31, 60, 32, 50, 22, 35, 36,...</code></pre>
 <p><strong>Exercício 3</strong>. Selecione as <strong>linhas</strong> para superfície igual a “II”.</p>
 <pre class="r"><code>dados %&gt;% 
   filter(SUP == &quot;II&quot;)</code></pre>
@@ -632,10 +632,10 @@ levels(as.factor(dados$Solo))</code></pre>
 <p><strong>Exercício 9</strong>. Selecione os registros cujo nome do solo termina com o “p”?</p>
 <pre class="r"><code>dados %&gt;% 
   filter(str_detect(Solo,&quot;p$&quot;))</code></pre>
-<p><strong>Exercício 10</strong>. Ordene os registro por ordem crescente de teor de ARGILA</p>
+<p><strong>Exercício 10</strong>. Ordene os registros por ordem crescente de teor de ARGILA</p>
 <pre class="r"><code>dados %&gt;% 
   arrange(ARGILA)</code></pre>
-<p><strong>Exercício 11</strong>. Ordene os registro por ordem decrescente de “H_Al”.</p>
+<p><strong>Exercício 11</strong>. Ordene os registros por ordem decrescente de “H_Al”.</p>
 <pre class="r"><code>dados %&gt;% 
   arrange(desc(H_Al))</code></pre>
 <p><strong>Exercício 12</strong>. Calcule a soma dos teores de ARGILA + SILTE, em seguida transforme o teor de fósforo para a escala logarítmica.</p>
@@ -655,7 +655,7 @@ dados %&gt;%
       ARGILA &gt; 60 ~ &quot;Muito argilosa&quot;,
       TRUE ~ &quot;Sem classificação&quot;)
   )</code></pre>
-<p><strong>Exercício 14</strong>. Calcule as estatísticas descrivas para alguns atributos do solo de sua preferência.</p>
+<p><strong>Exercício 14</strong>. Calcule as estatísticas descritivas para alguns atributos do solo de sua preferência.</p>
 <pre class="r"><code>library(agricolae)
 dados %&gt;% 
   group_by(SUP) %&gt;% 
@@ -665,8 +665,8 @@ dados %&gt;%
   )</code></pre>
 </div>
 </div>
-<div id="gráficos-usando-o-ggplot" class="section level2">
-<h2>Gráficos usando o ggplot</h2>
+<div id="gráficos-usando-o-ggplot2" class="section level2">
+<h2>Gráficos usando o ggplot2</h2>
 <p><strong>Exercício 15</strong>. Construa um gráfico de dispersão entre P e Ca.</p>
 <pre class="r"><code># chamar os dados
 # filtrar, agrupar, gerar estatísticas se necessário
@@ -906,7 +906,6 @@ hist(res)</code></pre>
 </div>
 <div id="referências" class="section level1">
 <h1>Referências</h1>
-<p>CHANG, W. R Graphics Cookbook. USA: O’Reilly Media, Inc, 2013. 397 p.</p>
 <p>TEETOR, P. R Cookbook. USA: O’Reilly Media, Inc, <a href="https://rc2e.com/" class="uri">https://rc2e.com/</a>.</p>
 </div>
 

@@ -67,7 +67,7 @@ $$
 & a) 1+7 = 8\\
 & b)1 - 2 \times10 = 19\\
 & c) 2^{10} = 1024\\
-& d) \frac{10}{2} = 3.33333
+& d) \frac{10}{3} = 3.33333
 \end{aligned}
 $$
 
@@ -188,7 +188,7 @@ dados <- read.table("https://raw.githubusercontent.com/arpanosso/pedometria/main
 ```
 
 ## Banco de dados em TXT
-Faça o dowload do banco de dados [geomorfologia.txt](https://raw.githubusercontent.com/arpanosso/pedometria/main/dados/geomorfologia.txt)
+Faça o download do banco de dados [geomorfologia.txt](https://raw.githubusercontent.com/arpanosso/pedometria/main/dados/geomorfologia.txt)
 
 ```{r}
 dados <- read.table("C:/R/geomorfologia.txt",h=TRUE,sep="\t")
@@ -282,13 +282,13 @@ dados %>%
   filter(str_detect(Solo,"p$"))
 ```
 
-**Exercício 10**. Ordene os registro por ordem crescente de teor de ARGILA
+**Exercício 10**. Ordene os registros por ordem crescente de teor de ARGILA
 ```{r eval=FALSE}
 dados %>% 
   arrange(ARGILA)
 ```
 
-**Exercício 11**. Ordene os registro por ordem decrescente de "H_Al".
+**Exercício 11**. Ordene os registros por ordem decrescente de "H_Al".
 ```{r eval=FALSE}
 dados %>% 
   arrange(desc(H_Al))
@@ -319,7 +319,7 @@ dados %>%
   )
 ```
 
-**Exercício 14**. Calcule as estatísticas descrivas para alguns atributos do solo de sua preferência. 
+**Exercício 14**. Calcule as estatísticas descritivas para alguns atributos do solo de sua preferência. 
 
 ```{r eval=FALSE}
 library(agricolae)
@@ -331,7 +331,7 @@ dados %>%
   )
 ```
 
-## Gráficos usando o ggplot
+## Gráficos usando o ggplot2
 
 **Exercício 15**. Construa um gráfico de dispersão entre P e Ca.
 ```{r}
@@ -520,7 +520,5 @@ lillie.test(res)
 cvm.test(res)
 ```
 # Referências
-
-CHANG, W. R Graphics Cookbook. USA: O’Reilly Media, Inc, 2013. 397 p.
 
 TEETOR, P. R Cookbook. USA: O’Reilly Media, Inc, https://rc2e.com/.
